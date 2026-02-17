@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftProposal - Professional Proposals in Hours, Not Weeks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #3498db;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 150px 2rem 100px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+        
+        /* Problem Section */
+        .problem {
+            padding: 80px 2rem;
+            background: #f8f9fa;
+            text-align: center;
+        }
+        
+        .problem h2 {
+            font-size: 2.5rem;
+            color: #e74c3c;
+            margin-bottom: 2rem;
+        }
+        
+        .problem-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .problem-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .problem-card h3 {
+            color: #e74c3c;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Solution Section */
+        .solution {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .solution h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #27ae60;
+        }
+        
+        .solution-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+        
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .solution-step {
+            text-align: center;
+        }
+        
+        .step-number {
+            background: #3498db;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        
+        .solution-step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .benefits h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .benefit-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 2rem;
+            background: #f8f9fa;
+        }
+        
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .pricing h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.featured {
+            border: 3px solid #3498db;
+            position: relative;
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #3498db;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #3498db;
+            margin: 1rem 0;
+        }
+        
+        .price-note {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            padding: 0.5rem 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .pricing-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* Samples Section */
+        .samples {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .samples h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .samples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .sample-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .sample-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .sample-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .sample-content {
+            padding: 1.5rem;
+        }
+        
+        .sample-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .sample-card .price-tag {
+            color: #3498db;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* CTA Section */
+        .final-cta {
+            padding: 80px 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .final-cta p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 80px 2rem;
+            background: #f8f9fa;
+        }
+        
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .contact-item {
+            margin: 2rem 0;
+            font-size: 1.3rem;
+        }
+        
+        .contact-item a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .cta-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+            
+            .pricing-grid,
+            .solution-grid,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">SwiftProposal</div>
+            <ul>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#samples">Samples</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Professional Proposals in Hours, Not Weeks</h1>
+        <p>Win more jobs by responding 10x faster than your competitors</p>
+        <a href="#contact" class="cta-button">Get Your First Proposal for $200</a>
+        <a href="#samples" class="cta-button cta-secondary">See Sample Work</a>
+    </section>
+
+    <section class="problem">
+        <h2>You're Losing Jobs Because Proposals Take Too Long</h2>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <h3>8-20 hours</h3>
+                <p>Time wasted per proposal doing manual work instead of building</p>
+            </div>
+            <div class="problem-card">
+                <h3>1-2 weeks</h3>
+                <p>How long it takes to send proposals - customers already hired someone else</p>
+            </div>
+            <div class="problem-card">
+                <h3>30%+</h3>
+                <p>Jobs lost to faster competitors who respond same-day</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="solution" id="how-it-works">
+        <h2>Here's How SwiftProposal Works</h2>
+        <p class="solution-subtitle">From site visit to professional proposal in 24 hours</p>
+        
+        <div class="solution-grid">
+            <div class="solution-step">
+                <div class="step-number">1</div>
+                <h3>You Do Your Site Visit</h3>
+                <p>Take photos, measurements, and notes like you always do. Nothing changes in your process.</p>
+            </div>
+            
+            <div class="solution-step">
+                <div class="step-number">2</div>
+                <h3>Send Us Your Info</h3>
+                <p>Email us the photos, measurements, and project details. Takes 5 minutes.</p>
+            </div>
+            
+            <div class="solution-step">
+                <div class="step-number">3</div>
+                <h3>We Create Your Proposal</h3>
+                <p>Our AI generates a complete professional proposal with scope of work, materials, timeline, and pricing structure.</p>
+            </div>
+            
+            <div class="solution-step">
+                <div class="step-number">4</div>
+                <h3>You Review & Send</h3>
+                <p>Adjust pricing to your actual costs (15 minutes), then send to your customer same-day. Win more jobs.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="benefits-container">
+            <h2>Why Contractors Choose SwiftProposal</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>10x Faster</h3>
+                    <p>Turn 20-hour proposals into 2 hours. Respond same-day instead of 1-2 weeks.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏆</div>
+                    <h3>Win More Jobs</h3>
+                    <p>Be first to respond. Customers hire contractors who show up fast and professional.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h3>Save Money</h3>
+                    <p>Stop wasting $600-1,500 in labor per proposal. Focus on building, not paperwork.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">📄</div>
+                    <h3>Professional Quality</h3>
+                    <p>Detailed scope of work, itemized pricing, timelines, terms - looks like you have a full office team.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>You Control Pricing</h3>
+                    <p>We generate the structure, you adjust to your actual material costs and markup.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">✓</div>
+                    <h3>Nothing Forgotten</h3>
+                    <p>AI includes permits, contingencies, payment schedules - everything professional proposals need.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="pricing-container">
+            <h2>Simple, Transparent Pricing</h2>
+            <p class="pricing-subtitle">No monthly fees. Pay only when you need a proposal.</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Trial Offer</h3>
+                    <div class="price">$200</div>
+                    <p class="price-note">First proposal to prove it works</p>
+                    <ul class="pricing-features">
+                        <li>Complete professional proposal</li>
+                        <li>Delivered in 24 hours</li>
+                        <li>Unlimited revisions</li>
+                        <li>See the quality before committing</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Start Your Trial</a>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="featured-badge">Most Popular</div>
+                    <h3>Pay Per Proposal</h3>
+                    <div class="price">$350</div>
+                    <p class="price-note">Per proposal, pay as you go</p>
+                    <ul class="pricing-features">
+                        <li>Same-day delivery</li>
+                        <li>Professional formatting</li>
+                        <li>Unlimited revisions</li>
+                        <li>Kitchen, bath, additions, full homes</li>
+                        <li>Perfect for 1-3 proposals/month</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Get Started</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Monthly Unlimited</h3>
+                    <div class="price">$799</div>
+                    <p class="price-note">Per month, unlimited proposals</p>
+                    <ul class="pricing-features">
+                        <li>Unlimited proposals</li>
+                        <li>Priority same-day delivery</li>
+                        <li>Direct phone support</li>
+                        <li>Best for 3+ proposals/month</li>
+                        <li>Save $250+ per month</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Go Unlimited</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="samples" id="samples">
+        <h2>Sample Proposals We've Created</h2>
+        <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 2rem;">Click any proposal below to view or download the full PDF</p>
+        <div class="samples-grid">
+            <div class="sample-card">
+                <div class="sample-content">
+                    <h3>Farmhouse Bathroom Remodel</h3>
+                    <p class="price-tag">$7,476 Project</p>
+                    <p>Complete bathroom transformation with shiplap walls, vintage vanity, patterned tile floor, and modern fixtures. Detailed 2-3 week timeline and itemized costs.</p>
+                    <p style="margin-top: 1.5rem;">
+                        <a href="Sample_Bathroom_Farmhouse_7k.pdf" target="_blank" class="cta-button" style="font-size: 0.9rem; padding: 0.8rem 1.5rem;">
+                            📄 View PDF Sample
+                        </a>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="sample-card">
+                <div class="sample-content">
+                    <h3>White Shaker Kitchen</h3>
+                    <p class="price-tag">$33,158 Project</p>
+                    <p>Full kitchen renovation with white cabinetry, quartz countertops, modern lighting, and new appliances. 3-4 week timeline with professional payment schedule.</p>
+                    <p style="margin-top: 1.5rem;">
+                        <a href="Sample_Kitchen_White_33k.pdf" target="_blank" class="cta-button" style="font-size: 0.9rem; padding: 0.8rem 1.5rem;">
+                            📄 View PDF Sample
+                        </a>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="sample-card">
+                <div class="sample-content">
+                    <h3>Modern Clean Kitchen</h3>
+                    <p class="price-tag">$47,379 Project</p>
+                    <p>Contemporary kitchen with white shaker cabinets, wood accent wall, large island with seating. Complete scope of work and 4-5 week timeline.</p>
+                    <p style="margin-top: 1.5rem;">
+                        <a href="Sample_Kitchen_Modern_Clean_47k.pdf" target="_blank" class="cta-button" style="font-size: 0.9rem; padding: 0.8rem 1.5rem;">
+                            📄 View PDF Sample
+                        </a>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="sample-card">
+                <div class="sample-content">
+                    <h3>Luxury Spa Bathroom</h3>
+                    <p class="price-tag">$38,697 Project</p>
+                    <p>High-end bathroom with marble tile, frameless glass shower, floating vanity, and freestanding tub. Detailed material specifications and labor breakdown.</p>
+                    <p style="margin-top: 1.5rem;">
+                        <a href="Sample_Bathroom_Luxury_Spa_39k.pdf" target="_blank" class="cta-button" style="font-size: 0.9rem; padding: 0.8rem 1.5rem;">
+                            📄 View PDF Sample
+                        </a>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="sample-card">
+                <div class="sample-content">
+                    <h3>Modern Luxury Kitchen</h3>
+                    <p class="price-tag">$85,892 Project</p>
+                    <p>Premium kitchen with light oak cabinets, waterfall island, concrete-look tile, and high-end appliances. 6-8 week timeline with custom fabrication details.</p>
+                    <p style="margin-top: 1.5rem;">
+                        <a href="Sample_Kitchen_Modern_Luxury_86k.pdf" target="_blank" class="cta-button" style="font-size: 0.9rem; padding: 0.8rem 1.5rem;">
+                            📄 View PDF Sample
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #f8f9fa; border-radius: 15px;">
+            <h3 style="margin-bottom: 1rem; color: #2c3e50;">Want All Sample PDFs at Once?</h3>
+            <p style="margin-bottom: 1.5rem; color: #666;">Download all 5 sample proposals to see our full range of work</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="Sample_Kitchen_White_33k.pdf" download class="cta-button" style="font-size: 0.9rem; padding: 0.8rem 1.5rem; background: #27ae60;">
+                    ⬇️ Kitchen $33k
+                </a>
+                <a href="Sample_Bathroom_Farmhouse_7k.pdf" download class="cta-button" style="font-size: 0.9rem; padding: 0.8rem 1.5rem; background: #27ae60;">
+                    ⬇️ Bathroom $7k
+                </a>
+                <a href="Sample_Kitchen_Modern_Clean_47k.pdf" download class="cta-button" style="font-size: 0.9rem; padding: 0.8rem 1.5rem; background: #27ae60;">
+                    ⬇️ Kitchen $47k
+                </a>
+                <a href="Sample_Bathroom_Luxury_Spa_39k.pdf" download class="cta-button" style="font-size: 0.9rem; padding: 0.8rem 1.5rem; background: #27ae60;">
+                    ⬇️ Bathroom $39k
+                </a>
+                <a href="Sample_Kitchen_Modern_Luxury_86k.pdf" download class="cta-button" style="font-size: 0.9rem; padding: 0.8rem 1.5rem; background: #27ae60;">
+                    ⬇️ Kitchen $86k
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <h2>Ready to Win More Jobs?</h2>
+        <p>Start with your first proposal for just $200. See the quality. Then decide.</p>
+        <a href="#contact" class="cta-button">Get Started Today</a>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <h2>Get Your First Proposal</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <strong>📧 Email:</strong><br>
+                    <a href="/cdn-cgi/l/email-protection#f1909895949fdf81839e819e82909d82b1969c90989ddf929e9c"><span class="__cf_email__" data-cfemail="7d1c14191813530d0f120d120e1c110e3d1a101c1411531e1210">[email&#160;protected]</span></a>
+                </div>
+                
+                <div class="contact-item">
+                    <strong>📱 Call or Text:</strong><br>
+                    <a href="tel:3019083461">(301) 908-3461</a>
+                </div>
+                
+                <div class="contact-item">
+                    <strong>📍 Serving:</strong><br>
+                    Silver Spring, MD & Greater DMV Area
+                </div>
+                
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #eee;">
+                    <h3 style="margin-bottom: 1rem;">How to Get Started:</h3>
+                    <ol style="text-align: left; max-width: 500px; margin: 0 auto; line-height: 1.8;">
+                        <li><strong>Email or call</strong> with your next project details</li>
+                        <li><strong>Send photos and measurements</strong> from your site visit</li>
+                        <li><strong>Receive professional proposal</strong> within 24 hours</li>
+                        <li><strong>Review, adjust pricing, send to customer</strong> same-day</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 SwiftProposal. Helping contractors win more jobs with faster, professional proposals.</p>
