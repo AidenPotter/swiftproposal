@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftProposal - Professional Proposals in Hours, Not Weeks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0f1f38;
+            --blue: #1a3a6b;
+            --gold: #c8a45a;
+            --gold-light: #e8c87a;
+            --white: #ffffff;
+            --off-white: #f8f6f2;
+            --light-gray: #edeae4;
+            --text: #2a2a2a;
+            --text-light: #666;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 31, 56, 0.97);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(200, 164, 90, 0.3);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--gold);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--gold); }
+
+        .nav-cta {
+            background: var(--gold);
+            color: var(--navy) !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600 !important;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            background: var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(26, 58, 107, 0.8) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 20%, rgba(200, 164, 90, 0.15) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(200, 164, 90, 0.15);
+            border: 1px solid rgba(200, 164, 90, 0.4);
+            color: var(--gold);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 span { color: var(--gold); }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.75);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(200, 164, 90, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* STATS BAR */
+        .stats-bar {
+            background: var(--gold);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: center;
+            gap: 5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+            color: var(--navy);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        /* PROBLEM SECTION */
+        .problem {
+            padding: 6rem 4rem;
+            background: var(--off-white);
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .problem-grid {
+            max-width: 1100px;
+            margin: 4rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 8px;
+            border-top: 4px solid var(--gold);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .problem-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--navy);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .problem-card h3 {
+            font-size: 1.1rem;
+            color: var(--navy);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .problem-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* HOW IT WORKS */
+        .how {
+            padding: 6rem 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .how-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .how-step {
+            text-align: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .step-circle {
+            width: 64px;
+            height: 64px;
+            background: var(--navy);
+            border: 3px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .how-step h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.8rem;
+        }
+
+        .how-step p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* PRICING */
+        .pricing {
+            padding: 6rem 4rem;
+            background: var(--navy);
+        }
+
+        .pricing .section-title { color: var(--white); }
+
+        .pricing-grid {
+            max-width: 1000px;
+            margin: 4rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(200, 164, 90, 0.5);
+        }
+
+        .pricing-card.featured {
+            background: rgba(200, 164, 90, 0.1);
+            border-color: var(--gold);
+            position: relative;
+        }
+
+        .featured-tag {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--navy);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.35rem 1.2rem;
+            border-radius: 50px;
+            white-space: nowrap;
+        }
+
+        .pricing-card h3 {
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .price-period {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            display: block;
+            margin-top: 0.3rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2.5rem;
+        }
+
+        .pricing-features li {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        /* SAMPLES */
+        .samples {
+            padding: 6rem 4rem;
+            background: var(--off-white);
+        }
+
+        .samples-grid {
+            max-width: 1100px;
+            margin: 4rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .sample-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .sample-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+        .sample-header {
+            background: var(--navy);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sample-type {
+            color: var(--gold);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sample-value {
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .sample-body {
+            padding: 1.5rem;
+        }
+
+        .sample-body h3 {
+            font-size: 1.1rem;
+            color: var(--navy);
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+        }
+
+        .sample-body p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .sample-btn {
+            display: block;
+            text-align: center;
+            background: var(--navy);
+            color: var(--white);
+            padding: 0.8rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .sample-btn:hover { background: var(--blue); }
+
+        .sample-btn.gold {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        .sample-btn.gold:hover { background: var(--gold-light); }
+
+        /* CONTACT */
+        .contact {
+            padding: 6rem 4rem;
+            background: var(--white);
+        }
+
+        .contact-container {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-box {
+            background: var(--navy);
+            border-radius: 16px;
+            padding: 4rem 3rem;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(200, 164, 90, 0.15) 0%, transparent 70%);
+        }
+
+        .contact-item {
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-label {
+            color: var(--gold);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-value {
+            color: var(--white);
+            font-size: 1.4rem;
+            font-weight: 600;
+            font-family: 'DM Sans', sans-serif;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .contact-value:hover { color: var(--gold); }
+
+        .contact-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin: 1.5rem 0;
+        }
+
+        .serving {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #070f1e;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+        }
+
+        footer span { color: var(--gold); }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .problem, .how, .pricing, .samples, .contact { padding: 4rem 1.5rem; }
+            .stats-bar { gap: 2rem; padding: 1.5rem; }
+            .contact-box { padding: 2.5rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">SwiftProposal</div>
+        <ul class="nav-links">
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#samples">Samples</a></li>
+            <li><a href="#contact" class="nav-cta">Get Started</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">AI-Powered Proposal Service</div>
+            <h1>Win More Jobs with <span>Faster Proposals</span></h1>
+            <p>We turn your site visit notes into professional proposals in hours — not weeks. Respond same-day and beat competitors who take 1-2 weeks.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn-primary">Get Your First Proposal — $200</a>
+                <a href="#samples" class="btn-secondary">View Sample Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+        <div class="stat">
+            <span class="stat-number">20hrs</span>
+            <span class="stat-label">Saved Per Proposal</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">24hr</span>
+            <span class="stat-label">Turnaround Time</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">10x</span>
+            <span class="stat-label">Faster Than Competitors</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">$200</span>
+            <span class="stat-label">Trial Proposal</span>
+        </div>
+    </div>
+
+    <!-- PROBLEM -->
+    <section class="problem">
+        <div style="max-width: 1100px; margin: 0 auto;">
+            <div class="section-label">The Problem</div>
+            <h2 class="section-title">You're Losing Jobs<br>Before They Even Start</h2>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-number">8-20</div>
+                    <h3>Hours Wasted Per Proposal</h3>
+                    <p>That's time you could spend building, managing crews, or growing your business — not doing paperwork.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-number">1-2</div>
+                    <h3>Weeks to Send a Proposal</h3>
+                    <p>By the time your proposal arrives, customers have already hired a faster competitor who responded same-day.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-number">30%</div>
+                    <h3>Jobs Lost to Slow Response</h3>
+                    <p>Research shows contractors lose nearly a third of potential jobs simply because they didn't respond fast enough.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how" id="how">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-title">From Site Visit to Proposal<br>in 24 Hours</h2>
+        <div class="how-grid">
+            <div class="how-step">
+                <div class="step-circle">1</div>
+                <h3>You Do Your Site Visit</h3>
+                <p>Take photos, measurements, and notes like you always do. Nothing changes in your process.</p>
+            </div>
+            <div class="how-step">
+                <div class="step-circle">2</div>
+                <h3>Send Us Your Details</h3>
+                <p>Email or text us your photos, measurements, and project notes. Takes just 5 minutes.</p>
+            </div>
+            <div class="how-step">
+                <div class="step-circle">3</div>
+                <h3>We Build Your Proposal</h3>
+                <p>AI generates a complete professional proposal with scope, materials, timeline, and pricing structure.</p>
+            </div>
+            <div class="how-step">
+                <div class="step-circle">4</div>
+                <h3>You Review and Send</h3>
+                <p>Adjust pricing to your actual costs (30 mins), then send to your customer same-day. Win the job.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing" id="pricing">
+        <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+            <div class="section-label" style="color: var(--gold);">Pricing</div>
+            <h2 class="section-title">Simple Pricing,<br>No Surprises</h2>
+            <p style="color: rgba(255,255,255,0.6); margin-top: 1rem;">Start with one proposal to see the quality. No commitment required.</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Trial Offer</h3>
+                <div class="price-amount">$200</div>
+                <span class="price-period">First proposal — prove it works</span>
+                <ul class="pricing-features">
+                    <li>Complete professional proposal</li>
+                    <li>Delivered within 24 hours</li>
+                    <li>Unlimited revisions</li>
+                    <li>Kitchen, bath, or any project</li>
+                </ul>
+                <a href="#contact" class="btn-primary" style="display: block; text-align: center;">Start Your Trial</a>
+            </div>
+            <div class="pricing-card featured">
+                <div class="featured-tag">Most Popular</div>
+                <h3>Pay Per Proposal</h3>
+                <div class="price-amount">$350</div>
+                <span class="price-period">Per proposal — no monthly fees</span>
+                <ul class="pricing-features">
+                    <li>Same-day delivery</li>
+                    <li>Professional formatting</li>
+                    <li>Unlimited revisions</li>
+                    <li>All project types</li>
+                    <li>Perfect for 1-3 proposals/month</li>
+                </ul>
+                <a href="#contact" class="btn-primary" style="display: block; text-align: center;">Get Started</a>
+            </div>
+            <div class="pricing-card">
+                <h3>Monthly Unlimited</h3>
+                <div class="price-amount">$799</div>
+                <span class="price-period">Per month — unlimited proposals</span>
+                <ul class="pricing-features">
+                    <li>Unlimited proposals</li>
+                    <li>Priority delivery</li>
+                    <li>Direct phone support</li>
+                    <li>Best for 3+ proposals/month</li>
+                    <li>Save $250+ per month</li>
+                </ul>
+                <a href="#contact" class="btn-primary" style="display: block; text-align: center;">Go Unlimited</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SAMPLES -->
+    <section class="samples" id="samples">
+        <div style="max-width: 1100px; margin: 0 auto;">
+            <div class="section-label">Our Work</div>
+            <h2 class="section-title">Sample Proposals</h2>
+            <p style="color: var(--text-light); margin-top: 1rem; max-width: 500px;">Click any proposal to view the full PDF and see the quality of work we deliver.</p>
+        </div>
+        <div class="samples-grid">
+            <div class="sample-card">
+                <div class="sample-header">
+                    <span class="sample-type">Bathroom</span>
+                    <span class="sample-value">$7,476</span>
+                </div>
+                <div class="sample-body">
+                    <h3>Farmhouse Bathroom Remodel</h3>
+                    <p>Shiplap walls, vintage vanity, patterned tile floor, modern fixtures. Full 2-3 week timeline and itemized costs.</p>
+                    <a href="Sample_Bathroom_Farmhouse_7k.pdf" target="_blank" class="sample-btn">View Full Proposal PDF</a>
+                </div>
+            </div>
+            <div class="sample-card">
+                <div class="sample-header">
+                    <span class="sample-type">Kitchen</span>
+                    <span class="sample-value">$33,158</span>
+                </div>
+                <div class="sample-body">
+                    <h3>White Shaker Kitchen Remodel</h3>
+                    <p>White cabinetry, quartz countertops, modern lighting, new appliances. 3-4 week timeline with payment schedule.</p>
+                    <a href="Sample_Kitchen_White_33k.pdf" target="_blank" class="sample-btn">View Full Proposal PDF</a>
+                </div>
+            </div>
+            <div class="sample-card">
+                <div class="sample-header">
+                    <span class="sample-type">Kitchen</span>
+                    <span class="sample-value">$47,379</span>
+                </div>
+                <div class="sample-body">
+                    <h3>Modern Clean Kitchen</h3>
+                    <p>White shaker cabinets, wood accent wall, large island with seating. Complete scope and 4-5 week timeline.</p>
+                    <a href="Sample_Kitchen_Modern_Clean_47k.pdf" target="_blank" class="sample-btn">View Full Proposal PDF</a>
+                </div>
+            </div>
+            <div class="sample-card">
+                <div class="sample-header">
+                    <span class="sample-type">Bathroom</span>
+                    <span class="sample-value">$38,697</span>
+                </div>
+                <div class="sample-body">
+                    <h3>Luxury Spa Bathroom</h3>
+                    <p>Marble tile, frameless glass shower, floating vanity, freestanding tub. Detailed material specs and labor breakdown.</p>
+                    <a href="Sample_Bathroom_Luxury_Spa_39k.pdf" target="_blank" class="sample-btn">View Full Proposal PDF</a>
+                </div>
+            </div>
+            <div class="sample-card">
+                <div class="sample-header">
+                    <span class="sample-type">Kitchen</span>
+                    <span class="sample-value">$85,892</span>
+                </div>
+                <div class="sample-body">
+                    <h3>Modern Luxury Kitchen</h3>
+                    <p>Light oak cabinets, waterfall island, concrete-look tile, high-end appliances. 6-8 week timeline with custom fab details.</p>
+                    <a href="Sample_Kitchen_Modern_Luxury_86k.pdf" target="_blank" class="sample-btn gold">View Full Proposal PDF</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="section-label">Get Started</div>
+            <h2 class="section-title">Ready to Win<br>More Jobs?</h2>
+            <p style="color: var(--text-light); margin-top: 1rem;">Start with your first proposal for just $200. See the quality. Then decide.</p>
+            <div class="contact-box">
+                <div class="contact-item">
+                    <div class="contact-label">Call or Text</div>
+                    <span class="contact-value">(301) 908-3461</span>
+                </div>
+                <hr class="contact-divider">
+                <div class="contact-item">
+                    <div class="contact-label">Email Us</div>
+                    <span class="contact-value">aiden.proposals&#64;gmail.com</span>
+                </div>
+                <hr class="contact-divider">
+                <div class="contact-item">
+                    <div class="contact-label">Hours</div>
+                    <span style="color: rgba(255,255,255,0.8); font-size: 1rem; display: block;">Monday - Saturday, 8AM - 7PM</span>
+                </div>
+                <hr class="contact-divider">
+                <p class="serving">Proudly serving contractors in Silver Spring, Bethesda,<br>Arlington, Washington DC and the greater DMV area</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 <span>SwiftProposal</span> &nbsp;|&nbsp; Professional Proposals for Remodeling Contractors &nbsp;|&nbsp; Silver Spring, MD</p>
+        <p style="margin-top: 0.5rem;">aiden.proposals&#64;gmail.com &nbsp;|&nbsp; (301) 908-3461</p>
+    </footer>
+
+</body>
+</html>
